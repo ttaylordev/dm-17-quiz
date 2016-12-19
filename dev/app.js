@@ -3,7 +3,7 @@
 
   var quizApp = angular.module('quizApp', ['ui.router']);
 
-  quizApp.angular.module('quizApp').config([
+  quizApp.config([
     '$compileProvider',
     '$stateProvider',
     '$urlRouterProvider',
@@ -15,18 +15,12 @@
       var homeState = {
         name: 'home',
         url: '/home',
-        templateUrl: './dist/html/homeView.html',
+        templateUrl: './html/homeView.html',
         controller: 'homeCtrl'
       };
 
-      var adminState = {
-        name: 'admin',
-        url: '/admin',
-        templateUrl: './dist/html/admin.html',
-        controller: 'adminCtrl'
-      };
-
-      $stateProvider.state(homeState).state(adminState);
+      $stateProvider.state(homeState)
+      // .state(quizState)
     }
   ]);
 })();

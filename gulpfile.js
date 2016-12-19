@@ -21,7 +21,7 @@ const flatten = require('gulp-flatten');
 var localEnv = 'dev';
 var prod = {};
 var injectTarget = gulp.src('./dev/index.html');;
-var injectSource = gulp.src(['./vendor/angular/angular.js', './scripts/bundle.js', './bundle.css'], {read: false, cwd: __dirname + '/dist'})
+var injectSource = gulp.src(['./scripts/bundle.js', './bundle.css'], {read: false, cwd: __dirname + '/dist'})
 
 const prodReq = function() {
   if (localEnv === 'production') {
@@ -35,7 +35,7 @@ const prodReq = function() {
       uglify: require( 'gulp-uglify' )
     }
     injectTarget = gulp.src('./dev/index.html');
-    injectSource = gulp.src(['./vendor/angular/angular.js', './scripts/bundle.min.js', './bundle.min.css'], {read: false, cwd: __dirname + '/dist'})
+    injectSource = gulp.src(['scripts/bundle.min.js', 'bundle.min.css'], {read: false, cwd: __dirname + '/dist'})
   } else {
     null
   }
@@ -98,7 +98,7 @@ gulp.task('html', function(){
   gulp.src('./dev/**/!(index)*.html')
     .pipe(cache(localEnv === 'production' ? prod.htmlify() : gutil.noop()))
     .pipe(cache(localEnv === 'production' ? prod.noHtmlComments() : gutil.noop()))
-    .pipe(flatten())
+    .pipe(cache(flatten()))
     .pipe(gulp.dest('./dist/html'))
     .pipe(browserSync.stream())
 });
